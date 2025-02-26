@@ -1,0 +1,30 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-compose
+    environment:
+      MYSQL_ROOT_PASSWORD: univesp
+      MYSQL_DATABASE: pi2025-1
+    ports:
+      - "3306:3306"
+    networks:
+      - mariadb_network
+
+networks:
+  mariadb_network:
+    driver: bridge
+
+# services:
+#   mariadb:
+#     image: mariadb:latest
+#     environment:
+#       MYSQL_ROOT_PASSWORD: univesp
+#       MYSQL_USER: univesp
+#       MYSQL_PASSWORD: univesp
+#       MYSQL_DATABASE: pi2025_1
+#     ports:
+#       - "3306:3306"
+#     # networks:
+#     #   - mariadb_network
+#     volumes:
+#       - "./pi2025_1.sql:/docker-entrypoint-initdb.d/1.sql"

@@ -1,0 +1,23 @@
+#se n foi criado
+sudo groupadd docker
+
+#adi usuario atual
+sudo usermod -aG docker $USER
+
+#ativar, teste
+newgrp docker
+
+#reiniciar dps
+
+
+#docker run
+docker run --name mariadb-container -d \
+    --network mariadb_network \
+    -e MYSQL_ROOT_PASSWORD=univesp \
+    -e MYSQL_DATABASE=pi2025-1 \
+    -p 3306:3306 \
+    mariadb:latest
+
+
+#docker compose
+docker-compose up -d
