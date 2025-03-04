@@ -1,0 +1,37 @@
+
+#caso adicione algo novo
+pip freeze > requirements.txt
+
+
+#tem que ter docker e python instalados
+
+#extenções recomendadas
+gitless
+docker
+autopepe8
+python
+pylance
+pydebugger
+vscode-icons
+
+
+##como rodar
+
+1.
+#para criar .venv local
+ctrl+shit+p   - accessar os comandos do vscode
+procurar python, criar ambiente(environment) e seguir
+
+2.
+#instalar deps(somente após setup do venv local)
+executar pelo terminal do vscode, que estara funcionando pelo venv(local)
+pip install -r requirements.txt
+
+3.
+#executar o mariadb
+
+
+
+###setup depuração
+só seguir à aba de depuração e se vc tem todas as extenções e tudo instalados
+ele reconhece que existe um debugger próprio para flask e roda sem problemas
