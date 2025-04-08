@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista de Clientes</title>
+	<script src="/static/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/bulma.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/bulma-list.css">
+</head>
+
+<body class="body has-background-dark">
+	<h1 class="title">Clientes</h1>
+	<div class="block is-inline-flex">
+		<button onclick="pegaClientes()" class="button is-primary">Get</button>
+		<!-- <div class="field"> -->
+		<input class="input is-primary " type="text" id="novo-cliente" placeholder="nome do cliente">
+		<!-- </div> -->
+		<button onclick="adiClientes()" class="button is-primary">Add</button>
+	</div>
+	<ul class="list has-visible-pointer-controls is-flex" id="listaClientes"></ul>
+
+	<!-- <script>
+		const API_URL = 'http://localhost:5000/api';
+
+		async function pegaClientes() {
+			const response = await fetch(`${API_URL}/clientes`);
+			const clientes = await response.json();
+			console.log("clientes:\n" + clientes);
+			console.log(clientes[0]);
+			console.log(clientes[1]);
+			const list = document.getElementById('listaClientes');
+			list.innerHTML = '';
+			clientes[0].forEach(cliente => {
+				const li = document.createElement('li');
+				li.textContent = cliente.content;
+				const deleteBtn = document.createElement('button');
+				deleteBtn.textContent = 'Delete';
+				// deleteBtn.onclick = () => deleteItem(cliente._id);
+				deleteBtn.onclick = () => deleteItem(cliente.nome);
+				li.appendChild(deleteBtn);
+				list.appendChild(li);
+			});
+		}
+
+		async function adiClientes() {
+			const input = document.getElementById('novo-cliente');
+			if (input.value.trim() !== '') {
+				const response = await fetch(`${API_URL}/clientes`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ nome: input.value }),
+				});
+				if (response.ok) {
+					input.value = '';
+					pegaClientes();
+				}
+			}
+		}
+
+		async function deleteItem(id) {
+			const response = await fetch(`${API_URL}/clientes`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ nome: id }),
+			});
+			if (response.ok) {
+				pegaClientes();
+			}
+		}
+
+		pegaClientes();
+	</script> -->
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+todo->sql alchemy, criar e org objetos arrumar front, render_template?
+#caso adicione algo novo
+pip freeze > requirements.txt
+
+
+#tem que ter docker e python instalados
+
+#extenções recomendadas
+gitless
+docker
+autopepe8
+python
+pylance
+pydebugger
+vscode-icons
+
+
+##como rodar
+
+1.
+#para criar .venv local
+ctrl+shit+p   - accessar os comandos do vscode
+procurar python, criar ambiente(environment) e seguir
+
+2.
+#instalar deps(somente após setup do venv local)
+executar pelo terminal do vscode, que estara funcionando pelo venv(local)
+pip install -r requirements.txt
+
+3.
+#executar o mariadb(ou não, se rodando em modo dev)
+docker compose up 
+ctrl+c para parar, ou fechar janela do terminal
+ou docker compose up -d para rodar no fundo
+com docker compose down para parar
+
+4.
+#executar projeto python
+python appjs.py
+
+
+
+###setup depuração
+só verificar o launch.json
