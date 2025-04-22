@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+    <script src="/static/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/bulma-list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .list-item {
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item-controls {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body class="has-background-dark">
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-light">Gerenciar Clientes</h1>
+            <h2 class="subtitle is-light">Adicione e remova clientes da sua lista.</h2>
+
+            <div class="field is-grouped">
+                <div class="control is-expanded">
+                    <input class="input is-info" type="text" id="novo-cliente" placeholder="Nome do cliente">
+                </div>
+                <div class="control">
+                    <button onclick="adiClientes()" class="button is-info">
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>Adicionar</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="box has-background-white-ter">
+                <ul class="list" id="listaClientes">
+                  
+                </ul>
+                
+            </div>
+
+            <a href="{{ url_for('home') }}" class="button is-light mt-4">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Voltar para a Página Inicial</span>
+            </a>
+        </div>
+    </section>
+
+   
+</body>
+
+</html>

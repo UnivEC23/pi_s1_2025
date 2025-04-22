@@ -2,80 +2,101 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Clientes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
 	<script src="/static/app.js"></script>
-	<link rel="stylesheet" type="text/css" href="/static/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/bulma-list.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/bulma.min.css">
 </head>
 
-<body class="body has-background-dark">
-	<h1 class="title">Clientes</h1>
-	<div class="block is-inline-flex">
-		<button onclick="pegaClientes()" class="button is-primary">Get</button>
-		<!-- <div class="field"> -->
-		<input class="input is-primary " type="text" id="novo-cliente" placeholder="nome do cliente">
-		<!-- </div> -->
-		<button onclick="adiClientes()" class="button is-primary">Add</button>
-	</div>
-	<ul class="list has-visible-pointer-controls is-flex" id="listaClientes"></ul>
+<body class="has-background-light">
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1">Bem-vindo ao Nosso Sistema!</h1>
+                <p class="subtitle is-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <br>
 
-	<!-- <script>
-		const API_URL = 'http://localhost:5000/api';
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <p class="has-text-justified">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
 
-		async function pegaClientes() {
-			const response = await fetch(`${API_URL}/clientes`);
-			const clientes = await response.json();
-			console.log("clientes:\n" + clientes);
-			console.log(clientes[0]);
-			console.log(clientes[1]);
-			const list = document.getElementById('listaClientes');
-			list.innerHTML = '';
-			clientes[0].forEach(cliente => {
-				const li = document.createElement('li');
-				li.textContent = cliente.content;
-				const deleteBtn = document.createElement('button');
-				deleteBtn.textContent = 'Delete';
-				// deleteBtn.onclick = () => deleteItem(cliente._id);
-				deleteBtn.onclick = () => deleteItem(cliente.nome);
-				li.appendChild(deleteBtn);
-				list.appendChild(li);
-			});
-		}
+                <br>
 
-		async function adiClientes() {
-			const input = document.getElementById('novo-cliente');
-			if (input.value.trim() !== '') {
-				const response = await fetch(`${API_URL}/clientes`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ nome: input.value }),
-				});
-				if (response.ok) {
-					input.value = '';
-					pegaClientes();
-				}
-			}
-		}
+                <div class="columns is-centered">
+                    <div class="column is-half">
+                        <div class="box has-background-white-ter">
+                            <h2 class="title is-4 has-text-primary">Sobre Nós</h2>
+                            <p class="has-text-justified">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                                architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+                                aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                                voluptatem sequi nesciunt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-		async function deleteItem(id) {
-			const response = await fetch(`${API_URL}/clientes`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ nome: id }),
-			});
-			if (response.ok) {
-				pegaClientes();
-			}
-		}
+                <br>
 
-		pegaClientes();
-	</script> -->
+                <button class="button is-info is-large" onclick="abrirModal()">Fazer Login</button>
+
+                <div class="modal" id="modalLogin">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box">
+                            <h2 class="title is-4">Acesso ao Sistema</h2>
+                         
+                            <form method="POST">
+                                <div class="field">
+                                    <label class="label">Usuário</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="username" placeholder="Seu usuário">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Senha</label>
+                                    <div class="control">
+                                        <input class="input" type="password" name="password" placeholder="Sua senha">
+                                    </div>
+                                </div>
+
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-primary">Entrar</button>
+                                    </div>
+                                    <div class="control">
+                                        <button class="button is-link is-light" onclick="fecharModal()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close" onclick="fecharModal()"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function abrirModal() {
+            document.getElementById('modalLogin').classList.add('is-active');
+        }
+
+        function fecharModal() {
+            document.getElementById('modalLogin').classList.remove('is-active');
+        }
+    </script>
 </body>
 
 </html>

@@ -25,11 +25,14 @@ tClientes = clientes_sqla()
 #     'database': 'pi2025_1'
 # }
 
-
-# @app.route('/', methods=['POST', 'GET'])
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def home():
     return render_template('indexjs.html')
+
+
+@app.route('/clientes', methods=['POST'])
+def clientes():
+    return render_template('clientes.html')
 
 
 @app.route('/api/clientes', methods=['GET'])
