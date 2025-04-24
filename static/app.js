@@ -29,27 +29,35 @@ async function pegaClientes() {
 			return response.json();
 		})
 		.then(data => {
-			const list = document.getElementById('listaClientes');
-			list.innerHTML = '';
-			console.log(data);
-			console.log(typeof data);
-			data.forEach(cliente => {
-				const li = document.createElement('li');
-				// li.textContent = cliente.nome 
-				li.className = "list-item is-inline-flex";
-				const div = document.createElement('div');
-				div.textContent = cliente.nome
-				div.className = "list-item-content";
-				// div.className = "list-item-title";
-				li.appendChild(div);
-				const deleteBtn = document.createElement('button');
-				deleteBtn.textContent = 'Delete';
-				deleteBtn.className = "button is-danger list-item-controls";
-				// deleteBtn.onclick = () => deleteItem(cliente._id);
-				deleteBtn.onclick = () => deleteItem(cliente.nome);
-				li.appendChild(deleteBtn);
-				list.appendChild(li);
-			});
+			// console.log(data.length);
+			if (data.length > 0) {
+				document.getElementById('listaCBox').classList.remove('is-hidden');
+				const list = document.getElementById('listaClientes');
+				list.innerHTML = '';
+				console.log(data);
+				console.log(typeof data);
+				data.forEach(cliente => {
+					const li = document.createElement('li');
+					// li.textContent = cliente.nome 
+					li.className = "list-item is-inline-flex";
+					const div = document.createElement('div');
+					div.textContent = cliente.nome
+					div.className = "list-item-content";
+					// div.className = "list-item-title";
+					li.appendChild(div);
+					const deleteBtn = document.createElement('button');
+					deleteBtn.textContent = 'Delete';
+					deleteBtn.className = "button is-danger list-item-controls";
+					// deleteBtn.onclick = () => deleteItem(cliente._id);
+					deleteBtn.onclick = () => deleteItem(cliente.nome);
+					li.appendChild(deleteBtn);
+					list.appendChild(li);
+				});
+			}
+			else {
+				document.getElementById('listaClientes').replaceChildren();
+				document.getElementById('listaCBox').classList.add('is-hidden');
+			}
 		})
 		.catch(error => {
 			console.error('There was a problem with the fetch operation:', error);
