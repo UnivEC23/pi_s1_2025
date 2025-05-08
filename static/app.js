@@ -40,11 +40,24 @@ async function pegaClientes() {
 					const li = document.createElement('li');
 					// li.textContent = cliente.nome 
 					li.className = "list-item is-inline-flex";
-					const div = document.createElement('div');
-					div.textContent = cliente.nome
-					div.className = "list-item-content";
+					const nome_div = document.createElement('div');
+					nome_div.textContent = cliente.nome
+					nome_div.className = "list-item-content";
 					// div.className = "list-item-title";
-					li.appendChild(div);
+					li.appendChild(nome_div);
+
+					const email_div = document.createElement('div');
+					email_div.textContent = cliente.email
+					email_div.className = "list-item-content";
+					// div.className = "list-item-title";
+					li.appendChild(email_div);
+
+					const solicit_div = document.createElement('div');
+					solicit_div.textContent = cliente.solicit
+					solicit_div.className = "list-item-content";
+					// div.className = "list-item-title";
+					li.appendChild(solicit_div);
+
 					const deleteBtn = document.createElement('button');
 					deleteBtn.textContent = 'Delete';
 					deleteBtn.className = "button is-danger list-item-controls";
@@ -66,13 +79,15 @@ async function pegaClientes() {
 
 async function adiClientes() {
 	const nome = document.getElementById('nome');
+	const email = document.getElementById('email');
+	const solicit = document.getElementById('solicit');
 	if (nome.value.trim() !== '') {
 		const response = await fetch(`${API_URL}/clientes`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ nome: nome.value }),
+			body: JSON.stringify({ nome: nome.value, email: email.value, solicit: solicit.value }),
 		});
 		if (response.ok) {
 			nome.value = '';

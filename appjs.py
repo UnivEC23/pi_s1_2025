@@ -19,8 +19,8 @@ def home():
         return render_template('indexjs.html')
     elif request.method == 'POST':
         novo =request.form
-        print(novo)
-        tClientes.adicionar(novo.get("nome"))     
+        # print(novo)
+        tClientes.adicionar(novo.get("nome"), novo.get("email"), novo.get("solicit"))     
         return render_template('indexjs.html')
 
 
@@ -29,8 +29,8 @@ def home():
 @app.route('/clientes', methods=['POST'])
 def clientes():
     login =request.form
-    print(login)
-    
+    # print(login)
+
     if login.get("username") ==login_usuario and login.get("password") ==login_senha:
         return render_template('clientes.html')
     else:
@@ -55,8 +55,12 @@ def clientesGet():
 def clientesPost():
     # pegando nome
     nome = request.json["nome"]
+    email = request.json["email"]
+    solicit = request.json["solicit"]
 
-    return tClientes.adicionar(nome)
+    # print(nome, email, solicit)
+
+    return tClientes.adicionar(nome, email, solicit)
 
 
 

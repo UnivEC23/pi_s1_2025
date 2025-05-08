@@ -4,11 +4,19 @@ from init import db
 
 @dataclass
 class Clientes(db.Model):
+    id:int
     nome: str
+    email: str
+    solicit: str
 
-# nome não pode ser primaria mas é só pelo teste
-    nome = db.Column(db.String(255), unique=False,
-                     nullable=False, primary_key=True)
+    id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True)
+    nome = db.Column(db.String(80), unique=False,
+                     nullable=True, primary_key=False)
+    email = db.Column(db.String(80), unique=False,
+                     nullable=True, primary_key=False)
+    solicit = db.Column(db.String(500), unique=False,
+                     nullable=True, primary_key=False)
+    
 
     def __repr__(self):
         return "<Nome: {}>".format(self.nome)
