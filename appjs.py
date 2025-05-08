@@ -8,18 +8,34 @@ from init import app
 id_clientes = 0
 tClientes = clientes_sqla()
 
+login_usuario="user"
+login_senha="pass"
+
 #---------paginas ativas--------------------------
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    return render_template('indexjs.html')
+    if request.method == 'GET':
+        return render_template('indexjs.html')
+    elif request.method == 'POST':
+        novo =request.form
+        print(novo)
+        tClientes.adicionar(novo.get("nome"))     
+        return render_template('indexjs.html')
 
 
 
 
 @app.route('/clientes', methods=['POST'])
 def clientes():
-    return render_template('clientes.html')
+    login =request.form
+    print(login)
+    
+    if login.get("username") ==login_usuario and login.get("password") ==login_senha:
+        return render_template('clientes.html')
+    else:
+       return app.redirect(app.url_for("home"))
+        
 
 
 #adicionado para testes sem login

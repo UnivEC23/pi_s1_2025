@@ -65,17 +65,17 @@ async function pegaClientes() {
 }
 
 async function adiClientes() {
-	const input = document.getElementById('novo-cliente');
-	if (input.value.trim() !== '') {
+	const nome = document.getElementById('nome');
+	if (nome.value.trim() !== '') {
 		const response = await fetch(`${API_URL}/clientes`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ nome: input.value }),
+			body: JSON.stringify({ nome: nome.value }),
 		});
 		if (response.ok) {
-			input.value = '';
+			nome.value = '';
 			pegaClientes();
 		}
 	}

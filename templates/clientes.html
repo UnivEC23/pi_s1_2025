@@ -35,9 +35,60 @@
             <h1 class="title is-light">Gerenciar Clientes</h1>
             <h2 class="subtitle is-light">Adicione e remova clientes da sua lista.</h2>
 
-            <div class="field is-grouped">
-                <div class="control is-expanded">
+            <div class="box is-hidden" id="listaCBox">
+                <h2 class="title is-3 ">Lista de Clientes</h2>
+                <ul class="list" id="listaClientes">
+
+                </ul>
+
+            </div>
+
+            <div class="box">
+                <h2 class="title">Adicionar Novo Cliente</h2>
+                <form>
+                    <!-- <div class="form"> -->
+                    <div class="field">
+                        <label class="label has-text-dark">Nome</label>
+                        <div class="control">
+                            <input id="nome" class="input is-info" type="text" name="nome" placeholder="Seu nome">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-dark">Email</label>
+                        <div class="control">
+                            <input id="email" class="input is-info" type="emai" name="email" placeholder="Seu email">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-dark">Solicitação</label>
+                        <div class="control">
+                            <textarea id="solic" class="textarea is-info" type="text" name="solic"
+                                placeholder="Descreve seu problema"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button onclick="adiClientes()" class="button is-info">
+                                <span class="icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span>Adicionar</span>
+                            </button>
+
+                        </div>
+                </form>
+                <br>
+                <br>
+                <!-- <div class="field is-grouped"> -->
+                <!-- <div class="control is-expanded">
                     <input class="input is-info" type="text" id="novo-cliente" placeholder="Nome do cliente">
+                </div>
+                <br>
+                <div class="control is-expanded">
+                    <input id="email" class="input is-info" type="email" name="email" placeholder="Seu email">
                 </div>
                 <div class="control">
                     <button onclick="adiClientes()" class="button is-info">
@@ -46,14 +97,8 @@
                         </span>
                         <span>Adicionar</span>
                     </button>
-                </div>
-            </div>
-
-            <div class="box has-background-white-ter is-hidden" id="listaCBox">
-                <ul class="list" id="listaClientes">
-
-                </ul>
-
+                </div> -->
+                <!-- </div> -->
             </div>
 
             <a href="{{ url_for('home') }}" class="button is-light mt-4">

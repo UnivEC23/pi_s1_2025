@@ -52,6 +52,47 @@
                 <br>
 
                 <button class="button is-info is-large" onclick="abrirModal()">Fazer Login</button>
+                <br>
+                <br>
+
+                <div class="box has-background-primary-light">
+                    <h2 class="title is-3 ">Solicitar Serviço</h2>
+                    <form method="POST" id="adicnovo">
+                        <!-- <div class="form"> -->
+                        <div class="field">
+                            <label class="label has-text-dark">Nome</label>
+                            <div class="control">
+                                <input id="nome" class="input" type="text" name="nome" placeholder="Seu nome">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label has-text-dark">Email</label>
+                            <div class="control">
+                                <input id="email" class="input" type="email" name="email" placeholder="Seu email">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label has-text-dark">Solicitação</label>
+                            <div class="control">
+                                <textarea id="solic" class="textarea" type="text" name="solic"
+                                    placeholder="Descreve seu problema"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-primary">Adicionar</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light" onclick="limpar()">Limpar</button>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </form>
+                </div>
+
 
                 <div class="modal" id="modalLogin">
                     <div class="modal-background"></div>
@@ -59,18 +100,21 @@
                         <div class="box">
                             <h2 class="title is-4">Acesso ao Sistema</h2>
 
-                            <form method="POST">
+                            <form action="/clientes" method="POST">
+                                <!-- <div class="form"> -->
                                 <div class="field">
                                     <label class="label">Usuário</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="username" placeholder="Seu usuário">
+                                        <input id="usern" class="input" type="text" name="username"
+                                            placeholder="Seu usuário">
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label class="label">Senha</label>
                                     <div class="control">
-                                        <input class="input" type="password" name="password" placeholder="Sua senha">
+                                        <input id="passw" class="input" type="password" name="password"
+                                            placeholder="Sua senha">
                                     </div>
                                 </div>
 
@@ -83,6 +127,7 @@
                                             onclick="fecharModal()">Cancelar</button>
                                     </div>
                                 </div>
+                                <!-- </div> -->
                             </form>
                         </div>
                     </div>
@@ -92,8 +137,34 @@
         </div>
     </section>
     <script>
+        function limpar() {
+            document.getElementById("adicnovo").reset();
+        }
+
+
         function abrirModal() {
             document.getElementById('modalLogin').classList.add('is-active');
+        }
+
+        async function login() {
+            const username = document.getElementById('usern').value;
+            const password = document.getElementById('passw').value;
+            console.log(username);
+            // if (input.value.trim() !== '') {
+            //     const response = await fetch(`${API_URL}/clientes`, {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({ nome: input.value }),
+            //     });
+            //     if (response.ok) {
+            //         input.value = '';
+            //         pegaClientes();
+            //     }
+            // }
+
+            // fecharModal();
         }
 
         function fecharModal() {
