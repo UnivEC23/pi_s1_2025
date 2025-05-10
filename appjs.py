@@ -3,49 +3,52 @@ from flask import Flask, render_template, request, jsonify, Response
 import sys
 import os
 from interfaces import clientes_sql, clientes_sqla
-from init import app
+from init import app, db
+from modelos import Comentario 
+from sqlalchemy import desc  
+
 
 id_clientes = 0
 tClientes = clientes_sqla()
 
-login_usuario="user"
-login_senha="pass"
+login_usuario = "user"
+login_senha = "pass"
 
-#---------paginas ativas--------------------------
+
+# ---------paginas ativas--------------------------
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
+    comentarios = pegar_comentarios()
     if request.method == 'GET':
-        return render_template('indexjs.html')
+        return render_template('indexjs.html', comentarios=comentarios)
     elif request.method == 'POST':
-        novo =request.form
-        # print(novo)
-        tClientes.adicionar(novo.get("nome"), novo.get("email"), novo.get("solicit"))     
-        return render_template('indexjs.html')
+        novo = request.form
+        if not novo.get("nome") or not novo.get("email") or not novo.get("solicit"):
+            return render_template('indexjs.html', form_error="Por favor, preencha todos os campos do formulário.", comentarios=comentarios)        
 
-
+        tClientes.adicionar(novo.get("nome"), novo.get("email"), novo.get("solicit"))
+        return render_template('indexjs.html', comentarios=comentarios)
 
 
 @app.route('/clientes', methods=['POST'])
 def clientes():
-    login =request.form
-    # print(login)
+    login = request.form
+    if not login.get("username") or not login.get("password"):
+        return render_template('indexjs.html', login_error="Por favor, preencha todos os campos do login.", comentarios=pegar_comentarios())
 
-    if login.get("username") ==login_usuario and login.get("password") ==login_senha:
+    if login.get("username") == login_usuario and login.get("password") == login_senha:
         return render_template('clientes.html')
     else:
-       return app.redirect(app.url_for("home"))
-        
+        return render_template('indexjs.html', login_error="Usuário ou senha incorretos.", comentarios=pegar_comentarios())
 
-
-#adicionado para testes sem login
+# adicionado para testes sem login
 @app.route('/clientes', methods=['GET'])
 def clientesget():
     return render_template('clientes.html')
 
 
-
-#--------api clientes------------------
+# --------api clientes------------------
 
 @app.route('/api/clientes', methods=['GET'])
 def clientesGet():
@@ -63,7 +66,6 @@ def clientesPost():
     return tClientes.adicionar(nome, email, solicit)
 
 
-
 @app.route('/api/clientes', methods=['DELETE'])
 def clientesDel():
     # pegando nome
@@ -71,7 +73,27 @@ def clientesDel():
 
     return tClientes.deletar(nome)
 
-#------------------------------
+# --------api comentarios-----------------
+
+@app.route('/api/comentarios', methods=['POST'])
+def adicionar_comentario():
+    try:
+        data = request.get_json()
+        autor = data.get('autor')
+        texto = data.get('texto')
+
+        if not autor or not texto:
+            return print('Autor e texto são obrigatórios.')
+
+        novo_comentario = Comentario(autor=autor, texto=texto)
+        db.session.add(novo_comentario)
+        db.session.commit()
+
+        return print('Comentário adicionado com sucesso!')
+    except Exception as e:
+      
+        return print('Erro ao adicionar comentário.'+e)
+# ------------------------------
 
 def rodar():
     # port = int(os.environ.get('PORT', 5000))
@@ -82,6 +104,16 @@ def rodar():
     # app.run()
 
 
+def pegar_comentarios():
+    with app.app_context(): 
+        try:
+            comentarios = Comentario.query.order_by(desc(Comentario.data_criacao)).limit(3).all()
+            return comentarios
+        except Exception as e:
+            print("Erro ao buscar comentários:", e)
+            return [] 
+
+
 if __name__ == "__main__":
 
     if (len(sys.argv) > 1):
@@ -89,4 +121,6 @@ if __name__ == "__main__":
             tClientes = clientes_sql()
 
     tClientes.criarTabela()
+    with app.app_context():
+        db.create_all()  # crias as tabelas
     rodar()

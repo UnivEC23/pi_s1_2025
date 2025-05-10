@@ -5,28 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
-    <!-- <script src="/static/app.js"></script> -->
-
     <link rel="stylesheet" type="text/css" href="/static/bulma.min.css">
 </head>
 
-<body class="has-background-light">
-    <section class="hero is-primary is-fullheight">
+
+<body class="has-background-dark">
+    <section class="hero is-dark is-fullheight">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <h1 class="title is-1">Bem-vindo ao Nosso Sistema!</h1>
-                <p class="subtitle is-3"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h1 class="title is-1 has-text-white">Acelere Suas Vendas Online!</h1>
+                <p class="subtitle is-3 has-text-grey-light">Transforme sua presença digital e conquiste mais clientes.</p>
                 <br>
 
                 <div class="columns is-centered">
                     <div class="column is-half">
-                        <p class="has-text-justified">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <p class="has-text-justified has-text-white-ter">
+                            No mundo digital de hoje, ter um site profissional e uma forte presença no Instagram é essencial para o sucesso.
+                            Nós te ajudamos a criar a estratégia perfeita, desde o design do seu site até o conteúdo que engaja seu público,
+                            para que você possa focar no que realmente importa: o crescimento do seu negócio.
                         </p>
                     </div>
                 </div>
@@ -35,116 +31,219 @@
 
                 <div class="columns is-centered">
                     <div class="column is-half">
-                        <div class="box has-background-white-ter">
-                            <h2 class="title is-4 has-text-primary">Sobre Nós</h2>
+                        <div class="box has-background-grey-darker has-text-white-ter">
+                            <h2 class="title is-4 has-text-info">Sobre Nós</h2>
                             <p class="has-text-justified">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                                architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                                sit
-                                aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                                voluptatem sequi nesciunt.
+                                Somos uma equipe apaixonada por marketing digital e desenvolvimento web. Nossa missão é impulsionar
+                                negócios de todos os tamanhos, oferecendo soluções personalizadas que geram resultados reais.
+                                Com anos de experiência, sabemos o caminho para o sucesso online e estamos prontos para guiar você.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <br>
-
-                <button class="button is-info is-large" onclick="abrirModal()">Fazer Login</button>
+                {% if login_error %}
+                <p class="help is-danger">{{ login_error }}</p>
+            {% endif %}
+                <button class="button is-success is-large" onclick="abrirModal()">Comece Agora</button>
                 <br>
                 <br>
+                <button class="button is-info m-3" onclick="abrirModalComentario()">Adicionar Comentário</button>
 
-                <div class="box has-background-primary-light">
-                    <h2 class="title is-3 ">Solicitar Serviço</h2>
+                <div class="modal" id="modalComentario">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box has-background-grey-darker has-text-white-ter">
+                            <h2 class="title is-4 has-text-info">Adicionar Novo Comentário</h2>
+                            <form id="formComentario">
+                                <div class="field">
+                                    <label class="label has-text-grey-light">Seu Nome</label>
+                                    <div class="control">
+                                        <input class="input is-dark has-text-white-ter" type="text" id="nomeComentario" placeholder="Seu nome" required>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label has-text-grey-light">Comentário</label>
+                                    <div class="control">
+                                        <textarea class="textarea is-dark has-text-white-ter" id="textoComentario" placeholder="Seu comentário" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-success" type="submit">Enviar Comentário</button>
+                                    </div>
+                                    <div class="control">
+                                        <button class="button is-light" type="button" onclick="fecharModalComentario()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close" onclick="fecharModalComentario()"></button>
+                </div>
+
+                <div class="box has-background-grey-darker">
+                    <h2 class="title is-3 has-text-info">Comentários Recentes</h2>
+                    {% if comentarios %}
+                        {% for comentario in comentarios %}
+                            <div class="box has-background-dark">
+                                <p class="has-text-success">{{ comentario.autor }}</p>
+                                <p class="has-text-white-ter">{{ comentario.texto }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="has-text-white-ter">Nenhum comentário encontrado.</p>
+                    {% endif %}
+                </div>
+
+
+                <div class="box has-background-grey-dark">
+                    <h2 class="title is-3 has-text-success">Solicite um Orçamento</h2>
                     <form method="POST" id="adicnovo">
-                        <!-- <div class="form"> -->
                         <div class="field">
-                            <label class="label has-text-dark">Nome</label>
+                            <label class="label has-text-grey-light">Seu Nome</label>
                             <div class="control">
-                                <input id="nome" class="input" type="text" name="nome" placeholder="Seu nome">
+                                <input id="nome" class="input is-dark has-text-white-ter" type="text" name="nome" placeholder="Seu nome">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label class="label has-text-dark">Email</label>
+                            <label class="label has-text-grey-light">Seu Email</label>
                             <div class="control">
-                                <input id="email" class="input" type="email" name="email" placeholder="Seu email">
+                                <input id="email" class="input is-dark has-text-white-ter" type="email" name="email" placeholder="Seu email">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label class="label has-text-dark">Solicitação</label>
+                            <label class="label has-text-grey-light">Detalhes do Projeto</label>
                             <div class="control">
-                                <textarea id="solicit" class="textarea" type="text" name="solicit"
-                                    placeholder="Descreve seu problema"></textarea>
+                                <textarea id="solicit" class="textarea is-dark has-text-white-ter" type="text" name="solicit"
+                                    placeholder="Descreva como podemos te ajudar"></textarea>
                             </div>
                         </div>
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-primary">Adicionar</button>
+                                <button class="button is-success">Enviar</button>
                             </div>
-                            <!-- <div class="control"> -->
                             <button class="button is-link is-light" onclick="limpar()">Limpar</button>
-                            <!-- </div> -->
-                        </div>
-                        <!-- </div> -->
-                    </form>
+                            </div>
+                        </form>
                 </div>
 
+            
+             
 
                 <div class="modal" id="modalLogin">
                     <div class="modal-background"></div>
                     <div class="modal-content">
-                        <div class="box">
-                            <h2 class="title is-4">Acesso ao Sistema</h2>
+                        <div class="box has-background-grey-darker has-text-white-ter">
+                            <h2 class="title is-4 has-text-info">Acesso ao Painel</h2>
 
                             <form action="/clientes" method="POST">
-                                <!-- <div class="form"> -->
                                 <div class="field">
-                                    <label class="label">Usuário</label>
+                                    <label class="label has-text-grey-light">Usuário</label>
                                     <div class="control">
-                                        <input id="usern" class="input" type="text" name="username"
+                                        <input id="usern" class="input is-dark has-text-white-ter" type="text" name="username"
                                             placeholder="Seu usuário">
                                     </div>
                                 </div>
 
                                 <div class="field">
-                                    <label class="label">Senha</label>
+                                    <label class="label has-text-grey-light">Senha</label>
                                     <div class="control">
-                                        <input id="passw" class="input" type="password" name="password"
+                                        <input id="passw" class="input is-dark has-text-white-ter" type="password" name="password"
                                             placeholder="Sua senha">
                                     </div>
                                 </div>
 
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-primary">Entrar</button>
+                                        <button class="button is-success">Entrar</button>
                                     </div>
-                                    <!-- <div class="control">  retirado para não iniciar ação-->
                                     <button class="button is-link is-light" onclick="fecharModal()">Cancelar</button>
-                                    <!-- </div> -->
-                                </div>
-                                <!-- </div> -->
-                            </form>
+                                    </div>
+                                </form>
                         </div>
                     </div>
                     <button class="modal-close is-large" aria-label="close" onclick="fecharModal()"></button>
                 </div>
             </div>
         </div>
+        
     </section>
     <script>
+        document.getElementById('adicnovo').addEventListener('submit', function(event) {
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const solicit = document.getElementById('solicit').value;
+
+    if (!nome || !email || !solicit) {
+        alert('Por favor, preencha todos os campos.');
+        event.preventDefault();
+        return;
+    }
+
+});
         function limpar() {
             document.getElementById("adicnovo").reset();
         }
 
 
-        function abrirModal() {
-            document.getElementById('modalLogin').classList.add('is-active');
+        function abrir(string) {
+            document.getElementById(string).classList.add('is-active');
+        }
+        function fechar(string) {
+            document.getElementById(string).classList.remove('is-active');
         }
 
+        function abrirModal() {
+           abrir('modalLogin');
+        }
+        function fecharModal() {
+           fechar('modalLogin');
+        }
+       
+        function abrirModalComentario() {
+            abrir('modalComentario');
+        }
+
+        function fecharModalComentario() {
+            fechar('modalComentario');
+        }
+
+        document.getElementById('formComentario').addEventListener('submit', function(event) {
+            event.preventDefault();
+            enviarComentario();
+        });
+
+        async function enviarComentario() {
+            const autor = document.getElementById('nomeComentario').value;
+            const texto = document.getElementById('textoComentario').value;
+
+            try {
+                const response = await fetch('/api/comentarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ autor: autor, texto: texto })
+                });
+
+                if (response.ok) {
+                    fecharModalComentario();
+            
+                    window.location.reload();
+                } else {
+                    console.error('Erro ao enviar comentário:', response.status);
+                    alert('Erro ao enviar comentário.');
+                }
+            } catch (error) {
+                console.error('Erro ao enviar comentário:', error);
+                alert('Erro ao enviar comentário.');
+            }
+        }
         async function login() {
             const username = document.getElementById('usern').value;
             const password = document.getElementById('passw').value;
@@ -170,6 +269,7 @@
             document.getElementById('modalLogin').classList.remove('is-active');
         }
     </script>
+   
 </body>
 
 </html>
