@@ -10,18 +10,29 @@
 
 
 <body class="has-background-dark">
+
+    <div style="position: absolute; top: 0.5rem; right: 0.5rem; display: flex; align-items: right;">
+        {% if login_error %}
+        <p class="help is-danger is-down">{{ login_error }}</p>
+        {% endif %}
+        <button class="button is-success is-right" onclick="abrirModal()">Login</button>
+
+    </div>
     <section class="hero is-dark is-fullheight">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title is-1 has-text-white">Acelere Suas Vendas Online!</h1>
-                <p class="subtitle is-3 has-text-grey-light">Transforme sua presença digital e conquiste mais clientes.</p>
+                <p class="subtitle is-3 has-text-grey-light">Transforme sua presença digital e conquiste mais clientes.
+                </p>
                 <br>
 
                 <div class="columns is-centered">
                     <div class="column is-half">
                         <p class="has-text-justified has-text-white-ter">
-                            No mundo digital de hoje, ter um site profissional e uma forte presença no Instagram é essencial para o sucesso.
-                            Nós te ajudamos a criar a estratégia perfeita, desde o design do seu site até o conteúdo que engaja seu público,
+                            No mundo digital de hoje, ter um site profissional e uma forte presença no Instagram é
+                            essencial para o sucesso.
+                            Nós te ajudamos a criar a estratégia perfeita, desde o design do seu site até o conteúdo que
+                            engaja seu público,
                             para que você possa focar no que realmente importa: o crescimento do seu negócio.
                         </p>
                     </div>
@@ -34,20 +45,17 @@
                         <div class="box has-background-grey-darker has-text-white-ter">
                             <h2 class="title is-4 has-text-info">Sobre Nós</h2>
                             <p class="has-text-justified">
-                                Somos uma equipe apaixonada por marketing digital e desenvolvimento web. Nossa missão é impulsionar
-                                negócios de todos os tamanhos, oferecendo soluções personalizadas que geram resultados reais.
-                                Com anos de experiência, sabemos o caminho para o sucesso online e estamos prontos para guiar você.
+                                Somos uma equipe apaixonada por marketing digital e desenvolvimento web. Nossa missão é
+                                impulsionar
+                                negócios de todos os tamanhos, oferecendo soluções personalizadas que geram resultados
+                                reais.
+                                Com anos de experiência, sabemos o caminho para o sucesso online e estamos prontos para
+                                guiar você.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <br>
-                {% if login_error %}
-                <p class="help is-danger">{{ login_error }}</p>
-            {% endif %}
-                <button class="button is-success is-large" onclick="abrirModal()">Comece Agora</button>
-                <br>
                 <br>
                 <button class="button is-info m-3" onclick="abrirModalComentario()">Adicionar Comentário</button>
 
@@ -60,13 +68,15 @@
                                 <div class="field">
                                     <label class="label has-text-grey-light">Seu Nome</label>
                                     <div class="control">
-                                        <input class="input is-dark has-text-white-ter" type="text" id="nomeComentario" placeholder="Seu nome" required>
+                                        <input class="input is-dark has-text-white-ter" type="text" id="nomeComentario"
+                                            placeholder="Seu nome" required>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label has-text-grey-light">Comentário</label>
                                     <div class="control">
-                                        <textarea class="textarea is-dark has-text-white-ter" id="textoComentario" placeholder="Seu comentário" required></textarea>
+                                        <textarea class="textarea is-dark has-text-white-ter" id="textoComentario"
+                                            placeholder="Seu comentário" required></textarea>
                                     </div>
                                 </div>
                                 <div class="field is-grouped">
@@ -74,7 +84,8 @@
                                         <button class="button is-success" type="submit">Enviar Comentário</button>
                                     </div>
                                     <div class="control">
-                                        <button class="button is-light" type="button" onclick="fecharModalComentario()">Cancelar</button>
+                                        <button class="button is-light" type="button"
+                                            onclick="fecharModalComentario()">Cancelar</button>
                                     </div>
                                 </div>
                             </form>
@@ -85,15 +96,23 @@
 
                 <div class="box has-background-grey-darker">
                     <h2 class="title is-3 has-text-info">Comentários Recentes</h2>
+                    <div class="box has-background-dark">
+                        <p class="has-text-success">Rose Alves, Cabeleireira</p>
+                        <p class="has-text-white-ter">Serviço rápido e eficiente!</p>
+                    </div>
+                    <div class="box has-background-dark">
+                        <p class="has-text-success">Aldo Marcus, Marceneiro</p>
+                        <p class="has-text-white-ter">Meu caso era complicado, mas eles resolveram</p>
+                    </div>
                     {% if comentarios %}
-                        {% for comentario in comentarios %}
-                            <div class="box has-background-dark">
-                                <p class="has-text-success">{{ comentario.autor }}</p>
-                                <p class="has-text-white-ter">{{ comentario.texto }}</p>
-                            </div>
-                        {% endfor %}
+                    {% for comentario in comentarios %}
+                    <div class="box has-background-dark">
+                        <p class="has-text-success">{{ comentario.autor }}</p>
+                        <p class="has-text-white-ter">{{ comentario.texto }}</p>
+                    </div>
+                    {% endfor %}
                     {% else %}
-                        <p class="has-text-white-ter">Nenhum comentário encontrado.</p>
+                    <!-- <p class="has-text-white-ter">Nenhum comentário encontrado.</p> -->
                     {% endif %}
                 </div>
 
@@ -104,22 +123,24 @@
                         <div class="field">
                             <label class="label has-text-grey-light">Seu Nome</label>
                             <div class="control">
-                                <input id="nome" class="input is-dark has-text-white-ter" type="text" name="nome" placeholder="Seu nome">
+                                <input id="nome" class="input is-dark has-text-white-ter" type="text" name="nome"
+                                    placeholder="Seu nome">
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label has-text-grey-light">Seu Email</label>
                             <div class="control">
-                                <input id="email" class="input is-dark has-text-white-ter" type="email" name="email" placeholder="Seu email">
+                                <input id="email" class="input is-dark has-text-white-ter" type="email" name="email"
+                                    placeholder="Seu email">
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label has-text-grey-light">Detalhes do Projeto</label>
                             <div class="control">
-                                <textarea id="solicit" class="textarea is-dark has-text-white-ter" type="text" name="solicit"
-                                    placeholder="Descreva como podemos te ajudar"></textarea>
+                                <textarea id="solicit" class="textarea is-dark has-text-white-ter" type="text"
+                                    name="solicit" placeholder="Descreva como podemos te ajudar"></textarea>
                             </div>
                         </div>
 
@@ -128,12 +149,12 @@
                                 <button class="button is-success">Enviar</button>
                             </div>
                             <button class="button is-link is-light" onclick="limpar()">Limpar</button>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                 </div>
 
-            
-             
+
+
 
                 <div class="modal" id="modalLogin">
                     <div class="modal-background"></div>
@@ -145,16 +166,16 @@
                                 <div class="field">
                                     <label class="label has-text-grey-light">Usuário</label>
                                     <div class="control">
-                                        <input id="usern" class="input is-dark has-text-white-ter" type="text" name="username"
-                                            placeholder="Seu usuário">
+                                        <input id="usern" class="input is-dark has-text-white-ter" type="text"
+                                            name="username" placeholder="Seu usuário">
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label class="label has-text-grey-light">Senha</label>
                                     <div class="control">
-                                        <input id="passw" class="input is-dark has-text-white-ter" type="password" name="password"
-                                            placeholder="Sua senha">
+                                        <input id="passw" class="input is-dark has-text-white-ter" type="password"
+                                            name="password" placeholder="Sua senha">
                                     </div>
                                 </div>
 
@@ -163,29 +184,29 @@
                                         <button class="button is-success">Entrar</button>
                                     </div>
                                     <button class="button is-link is-light" onclick="fecharModal()">Cancelar</button>
-                                    </div>
-                                </form>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <button class="modal-close is-large" aria-label="close" onclick="fecharModal()"></button>
                 </div>
             </div>
         </div>
-        
+
     </section>
     <script>
-        document.getElementById('adicnovo').addEventListener('submit', function(event) {
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const solicit = document.getElementById('solicit').value;
+        document.getElementById('adicnovo').addEventListener('submit', function (event) {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const solicit = document.getElementById('solicit').value;
 
-    if (!nome || !email || !solicit) {
-        alert('Por favor, preencha todos os campos.');
-        event.preventDefault();
-        return;
-    }
+            if (!nome || !email || !solicit) {
+                alert('Por favor, preencha todos os campos.');
+                event.preventDefault();
+                return;
+            }
 
-});
+        });
         function limpar() {
             document.getElementById("adicnovo").reset();
         }
@@ -199,12 +220,12 @@
         }
 
         function abrirModal() {
-           abrir('modalLogin');
+            abrir('modalLogin');
         }
         function fecharModal() {
-           fechar('modalLogin');
+            fechar('modalLogin');
         }
-       
+
         function abrirModalComentario() {
             abrir('modalComentario');
         }
@@ -213,7 +234,7 @@
             fechar('modalComentario');
         }
 
-        document.getElementById('formComentario').addEventListener('submit', function(event) {
+        document.getElementById('formComentario').addEventListener('submit', function (event) {
             event.preventDefault();
             enviarComentario();
         });
@@ -233,7 +254,7 @@
 
                 if (response.ok) {
                     fecharModalComentario();
-            
+
                     window.location.reload();
                 } else {
                     console.error('Erro ao enviar comentário:', response.status);
@@ -269,7 +290,7 @@
             document.getElementById('modalLogin').classList.remove('is-active');
         }
     </script>
-   
+
 </body>
 
 </html>
