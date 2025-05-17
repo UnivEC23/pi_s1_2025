@@ -83,16 +83,16 @@ def adicionar_comentario():
         texto = data.get('texto')
 
         if not autor or not texto:
-            return print('Autor e texto são obrigatórios.')
+            return jsonify({'erro':'Autor e texto são obrigatórios.'})
 
         novo_comentario = Comentario(autor=autor, texto=texto)
         db.session.add(novo_comentario)
         db.session.commit()
 
-        return print('Comentário adicionado com sucesso!')
+        return jsonify({'mensagemok':'Comentário adicionado com sucesso!'})
     except Exception as e:
       
-        return print('Erro ao adicionar comentário.'+e)
+        return jsonify({'mensagemoff':'Erro ao adicionar comentário.'+e})
 # ------------------------------
 
 def rodar():

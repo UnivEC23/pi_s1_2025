@@ -252,18 +252,21 @@
                     body: JSON.stringify({ autor: autor, texto: texto })
                 });
 
+                
+                const data = await response.json();
+
                 if (response.ok) {
                     fecharModalComentario();
 
                     window.location.reload();
+                    alert(data.mensagemok);
                 } else {
                     console.error('Erro ao enviar comentário:', response.status);
-                    alert('Erro ao enviar comentário.');
+                    alert(data.erro);
                 }
             } catch (error) {
                 console.error('Erro ao enviar comentário:', error);
-                alert('Erro ao enviar comentário.');
-            }
+                alert(data.mensagemoff)            }
         }
         async function login() {
             const username = document.getElementById('usern').value;
