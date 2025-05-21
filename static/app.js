@@ -81,6 +81,13 @@ async function adiClientes() {
 	const nome = document.getElementById('nome');
 	const email = document.getElementById('email');
 	const solicit = document.getElementById('solicit');
+
+	if (!nome.value || !email.value || !solicit.value) {
+		alert('Por favor, preencha todos os campos.');
+		return;
+	}
+
+	// console.log(" adiclientes", nome, email, solicit)
 	if (nome.value.trim() !== '') {
 		const response = await fetch(`${API_URL}/clientes`, {
 			method: 'POST',

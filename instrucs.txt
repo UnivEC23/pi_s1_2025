@@ -1,3 +1,4 @@
+repo: https://github.com/UnivEC23/pi_s1_2025
 todo->sql alchemy, criar e org objetos arrumar front, render_template?
 #caso adicione algo novo
 pip freeze > requirements.txt

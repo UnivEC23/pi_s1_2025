@@ -45,7 +45,7 @@
 
             <div class="box">
                 <h2 class="title">Adicionar Novo Cliente</h2>
-                <form  id="adicnovo">
+                <form id="fomul" onsubmit="semPost(event)">
                     <!-- <div class="form"> -->
                     <div class="field">
                         <label class="label has-text-dark">Nome</label>
@@ -110,20 +110,12 @@
         </div>
     </section>
 
-<script>
-       document.getElementById('adicnovo').addEventListener('submit', function(event) {
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const solicit = document.getElementById('solicit').value;
-
-    if (!nome || !email || !solicit) {
-        alert('Por favor, preencha todos os campos.');
-        event.preventDefault(); // Impede o envio do formulário
-        return;
-    }
-
-});
-</script>
+    <script>
+        function semPost(e) {
+            e.preventDefault();
+            return false;
+        }
+    </script>
 </body>
 
 </html>
