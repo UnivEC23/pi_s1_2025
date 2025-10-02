@@ -11,10 +11,10 @@ db_mariadb = "mariadb+mariadbconnector://univesp:univesp@127.0.0.1:3306/pi2025_1
 
 # descomentar para alternar entre um e outro
 # produção
-db_atual = db_mariadb
+#db_atual = db_mariadb
 
 # desenvolvimento
-# db_atual = db_sql_lite
+db_atual = db_sql_lite
 
 # app = Flask(__name__)
 nomeApp = "Appy"
